@@ -19,6 +19,7 @@
 #import "SUPlainInstallerInternals.h"
 #import "SUBinaryDeltaCommon.h"
 #import "SUCodeSigningVerifier.h"
+#import "SUXPC.h"
 #import "SUUpdater_Private.h"
 
 @interface SUBasicUpdateDriver ()
@@ -386,12 +387,24 @@
         pathToRelaunch = [updaterDelegate pathToRelaunchForUpdater:self.updater];
     }
     NSString *relaunchToolPath = [[NSBundle bundleWithPath:self.relaunchPath] executablePath];
-    [NSTask launchedTaskWithLaunchPath:relaunchToolPath arguments:@[[self.host bundlePath],
-                                                                    pathToRelaunch,
-                                                                    [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]],
-                                                                    self.tempDir,
-                                                                    relaunch ? @"1" : @"0",
-                                                                    showUI ? @"1" : @"0"]];
+    NSArray *relaunchToolArguments = @[[self.host bundlePath],
+                                       pathToRelaunch,
+                                       [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]],
+                                       self.tempDir,
+                                       relaunch ? @"1" : @"0",
+                                       showUI ? @"1" : @"0"];
+    
+    BOOL inSandbox = (nil != [[[NSProcessInfo processInfo] environment] objectForKey:@"APP_SANDBOX_CONTAINER_ID"]);
+    BOOL useXPC = inSandbox && [[NSFileManager defaultManager] fileExistsAtPath:[sparkleBundle.bundlePath stringByAppendingPathComponent:[NSString stringWithFormat:@"XPCServices/%@.xpc", @(SPARKLE_SANDBOX_SERVICE_NAME)]]];
+    
+    SULog(@"installWithToolAndRelaunch - using xpc=%d", useXPC);
+    
+    if (useXPC) {
+        [SUXPC launchTaskWithLaunchPath:relaunchToolPath arguments:relaunchToolArguments];
+    } else {
+        [NSTask launchedTaskWithLaunchPath:relaunchToolPath arguments:relaunchToolArguments];
+    }
+    
     [self terminateApp];
 }
 

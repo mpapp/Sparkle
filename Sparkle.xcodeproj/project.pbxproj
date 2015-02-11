@@ -53,6 +53,20 @@
 		14958C6E19AEBC950061B14F /* signed-test-file.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14958C6B19AEBC530061B14F /* signed-test-file.txt */; };
 		14958C6F19AEBC980061B14F /* test-pubkey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 14958C6C19AEBC610061B14F /* test-pubkey.pem */; };
 		3772FEA913DE0B6B00F79537 /* SUVersionDisplayProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3772FEA813DE0B6B00F79537 /* SUVersionDisplayProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		377E56571A8BB6AF003F5516 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867D6A5FE840307C02AAC07 /* AppKit.framework */; };
+		377E56581A8BB6B2003F5516 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867D69BFE84028FC02AAC07 /* Foundation.framework */; };
+		377E56591A8BB6B7003F5516 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B5F8F609C4CEB300B25A18 /* Security.framework */; };
+		377E565E1A8BB71D003F5516 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377E565B1A8BB71D003F5516 /* main.m */; };
+		377E56621A8BB73C003F5516 /* SUCodeSigningVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B078CD15A5FB6100600039 /* SUCodeSigningVerifier.m */; };
+		377E56631A8BB744003F5516 /* SUPlainInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5040DAE8AB80026945C /* SUPlainInstaller.m */; };
+		377E56641A8BB744003F5516 /* SUPlainInstallerInternals.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5F8E509C4CE3C00B25A18 /* SUPlainInstallerInternals.m */; };
+		377E56651A8BB74C003F5516 /* SUConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 61299A5F09CA6EB100B7442F /* SUConstants.m */; };
+		377E56661A8BB753003F5516 /* SUInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5000DAE88B40026945C /* SUInstaller.m */; };
+		377E56671A8BB759003F5516 /* SULog.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C14F05136EF6DB00649790 /* SULog.m */; };
+		377E56681A8BB760003F5516 /* SUPackageInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 618FA5210DAE8E8A0026945C /* SUPackageInstaller.m */; };
+		377E56691A8BB780003F5516 /* SUXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 377E565D1A8BB71D003F5516 /* SUXPC.m */; };
+		37F3EFC41A8BB8DA00834FC5 /* org.sparkle-project.Sparkle.SandboxService.xpc in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 377E56491A8BB5E9003F5516 /* org.sparkle-project.Sparkle.SandboxService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37F3EFD11A8BBCB500834FC5 /* SUGuidedPackageInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B61AB1972D488004E0C3C /* SUGuidedPackageInstaller.m */; };
 		55C14BD4136EEFCE00649790 /* Autoupdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C14BD3136EEFCE00649790 /* Autoupdate.m */; };
 		55C14BD9136EF00C00649790 /* SUStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C14BD8136EF00C00649790 /* SUStatus.xib */; };
 		55C14BEE136EF20D00649790 /* SUAutomaticUpdateAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C14BDA136EF20D00649790 /* SUAutomaticUpdateAlert.xib */; };
@@ -287,6 +301,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		377E566A1A8BB8BC003F5516 /* Copy Files (1 item) */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				37F3EFC41A8BB8DA00834FC5 /* org.sparkle-project.Sparkle.SandboxService.xpc in Copy Files (1 item) */,
+			);
+			name = "Copy Files (1 item)";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61B5FB4D09C4E9FA00B25A18 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,6 +357,14 @@
 		14958C6B19AEBC530061B14F /* signed-test-file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "signed-test-file.txt"; sourceTree = "<group>"; };
 		14958C6C19AEBC610061B14F /* test-pubkey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-pubkey.pem"; sourceTree = "<group>"; };
 		3772FEA813DE0B6B00F79537 /* SUVersionDisplayProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUVersionDisplayProtocol.h; sourceTree = "<group>"; };
+		377E56421A8BB595003F5516 /* ConfigSandboxService.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigSandboxService.xcconfig; sourceTree = "<group>"; };
+		377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigSandboxServiceDebug.xcconfig; sourceTree = "<group>"; };
+		377E56441A8BB595003F5516 /* ConfigSandboxServiceRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigSandboxServiceRelease.xcconfig; sourceTree = "<group>"; };
+		377E56491A8BB5E9003F5516 /* org.sparkle-project.Sparkle.SandboxService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = "org.sparkle-project.Sparkle.SandboxService.xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
+		377E565B1A8BB71D003F5516 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SandboxService/main.m; sourceTree = "<group>"; };
+		377E565C1A8BB71D003F5516 /* SUXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SUXPC.h; path = SandboxService/SUXPC.h; sourceTree = "<group>"; };
+		377E565D1A8BB71D003F5516 /* SUXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SUXPC.m; path = SandboxService/SUXPC.m; sourceTree = "<group>"; };
+		377E56611A8BB730003F5516 /* SandboxService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SandboxService-Info.plist"; path = "SandboxService/SandboxService-Info.plist"; sourceTree = "<group>"; };
 		4607BEA21948443800EF8DA4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Sparkle.strings; sourceTree = "<group>"; };
 		4607BEA31948443800EF8DA4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nb; path = nb.lproj/SUAutomaticUpdateAlert.xib; sourceTree = "<group>"; };
 		4607BEA41948443800EF8DA4 /* nb */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nb; path = nb.lproj/SUUpdateAlert.xib; sourceTree = "<group>"; };
@@ -558,6 +591,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		377E56461A8BB5E9003F5516 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377E56571A8BB6AF003F5516 /* AppKit.framework in Frameworks */,
+				377E56581A8BB6B2003F5516 /* Foundation.framework in Frameworks */,
+				377E56591A8BB6B7003F5516 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C14BB5136EEF1500649790 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,6 +672,7 @@
 				61B5F90209C4CEE200B25A18 /* Sparkle Test App.app */,
 				612279D90DB5470200AB99EA /* Sparkle Unit Tests.xctest */,
 				8DC2EF5B0486A6940098B216 /* Sparkle.framework */,
+				377E56491A8BB5E9003F5516 /* org.sparkle-project.Sparkle.SandboxService.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -750,6 +794,7 @@
 				61299B3909CB055000B7442F /* Appcast Support */,
 				55C14BD5136EEFD000649790 /* Autoupdate */,
 				089C1665FE841158C02AAC07 /* Framework Resources */,
+				377E565A1A8BB6E3003F5516 /* SandboxService */,
 				618FA6DB0DB485440026945C /* Installation */,
 				61B5F8F309C4CE5900B25A18 /* Other Sources */,
 				6101354A0DD25B7F0049ACDF /* Unarchiving */,
@@ -766,6 +811,25 @@
 				14958C6C19AEBC610061B14F /* test-pubkey.pem */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		377E565A1A8BB6E3003F5516 /* SandboxService */ = {
+			isa = PBXGroup;
+			children = (
+				377E565C1A8BB71D003F5516 /* SUXPC.h */,
+				377E565D1A8BB71D003F5516 /* SUXPC.m */,
+				377E565B1A8BB71D003F5516 /* main.m */,
+				377E56601A8BB724003F5516 /* Supporting Files */,
+			);
+			name = SandboxService;
+			sourceTree = "<group>";
+		};
+		377E56601A8BB724003F5516 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				377E56611A8BB730003F5516 /* SandboxService-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		55C14BD5136EEFD000649790 /* Autoupdate */ = {
@@ -961,6 +1025,9 @@
 				FA1941CE0D94A70100DD942E /* ConfigRelaunch.xcconfig */,
 				FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */,
 				FA1941D40D94A70100DD942E /* ConfigRelaunchRelease.xcconfig */,
+				377E56421A8BB595003F5516 /* ConfigSandboxService.xcconfig */,
+				377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */,
+				377E56441A8BB595003F5516 /* ConfigSandboxServiceRelease.xcconfig */,
 				FA1941CD0D94A70100DD942E /* ConfigTestApp.xcconfig */,
 				FA1941CB0D94A70100DD942E /* ConfigTestAppDebug.xcconfig */,
 				FA1941D20D94A70100DD942E /* ConfigTestAppRelease.xcconfig */,
@@ -1063,6 +1130,23 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		377E56481A8BB5E9003F5516 /* SandboxService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 377E56531A8BB5E9003F5516 /* Build configuration list for PBXNativeTarget "SandboxService" */;
+			buildPhases = (
+				377E56451A8BB5E9003F5516 /* Sources */,
+				377E56461A8BB5E9003F5516 /* Frameworks */,
+				377E56561A8BB693003F5516 /* Set Git Version Info */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SandboxService;
+			productName = SandboxService;
+			productReference = 377E56491A8BB5E9003F5516 /* org.sparkle-project.Sparkle.SandboxService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		55C14BB6136EEF1500649790 /* Autoupdate */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C14BBE136EEF1500649790 /* Build configuration list for PBXNativeTarget "Autoupdate" */;
@@ -1144,6 +1228,7 @@
 				8DC2EF500486A6940098B216 /* Headers */,
 				8DC2EF520486A6940098B216 /* Resources */,
 				142E0E0319A6A24100E4312B /* CopyFiles */,
+				377E566A1A8BB8BC003F5516 /* Copy Files (1 item) */,
 				8DC2EF540486A6940098B216 /* Sources */,
 				8DC2EF560486A6940098B216 /* Frameworks */,
 				6131B1910DDCDE32005215F0 /* Run Script: Set Git Version Info */,
@@ -1171,6 +1256,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Sparkle Project";
 				TargetAttributes = {
+					377E56481A8BB5E9003F5516 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					612279D80DB5470200AB99EA = {
 						TestTargetID = 8DC2EF4F0486A6940098B216;
 					};
@@ -1233,6 +1321,7 @@
 				612279D80DB5470200AB99EA /* Sparkle Unit Tests */,
 				5D06E8CF0FD68C7C005AE3F6 /* BinaryDelta */,
 				55C14BB6136EEF1500649790 /* Autoupdate */,
+				377E56481A8BB5E9003F5516 /* SandboxService */,
 				14732BC51960F69300593899 /* Distribution */,
 				1420DF491962329200203BB0 /* Documentation */,
 				1495005F195FB89400BC5B5B /* All */,
@@ -1295,6 +1384,21 @@
 			inputPaths = (
 			);
 			name = "Run Script: Set Git Version Info";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Configurations/set-git-version-info.sh\"";
+			showEnvVarsInLog = 0;
+		};
+		377E56561A8BB693003F5516 /* Set Git Version Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Git Version Info";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1368,6 +1472,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		377E56451A8BB5E9003F5516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377E56621A8BB73C003F5516 /* SUCodeSigningVerifier.m in Sources */,
+				377E56651A8BB74C003F5516 /* SUConstants.m in Sources */,
+				37F3EFD11A8BBCB500834FC5 /* SUGuidedPackageInstaller.m in Sources */,
+				377E56661A8BB753003F5516 /* SUInstaller.m in Sources */,
+				377E56671A8BB759003F5516 /* SULog.m in Sources */,
+				377E56681A8BB760003F5516 /* SUPackageInstaller.m in Sources */,
+				377E56631A8BB744003F5516 /* SUPlainInstaller.m in Sources */,
+				377E56641A8BB744003F5516 /* SUPlainInstallerInternals.m in Sources */,
+				377E565E1A8BB71D003F5516 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C14BB4136EEF1500649790 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1461,6 +1581,7 @@
 				61B5F8EE09C4CE3C00B25A18 /* SUUpdater.m in Sources */,
 				61A354560DF113C70076ECB1 /* SUUserInitiatedUpdateDriver.m in Sources */,
 				61180BCB0D64138900B4E0D1 /* SUWindowController.m in Sources */,
+				377E56691A8BB780003F5516 /* SUXPC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1760,6 +1881,20 @@
 			};
 			name = Release;
 		};
+		377E56541A8BB5E9003F5516 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		377E56551A8BB5E9003F5516 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 377E56441A8BB595003F5516 /* ConfigSandboxServiceRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 		55C14BBB136EEF1500649790 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
@@ -1862,6 +1997,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		377E56531A8BB5E9003F5516 /* Build configuration list for PBXNativeTarget "SandboxService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				377E56541A8BB5E9003F5516 /* Debug */,
+				377E56551A8BB5E9003F5516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

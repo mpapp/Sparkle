@@ -29,7 +29,10 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
 	BOOL returnValue = YES;
 	
     /* AuthorizationExecuteWithPrivileges used to support 10.4+; should be replaced with XPC or external process */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	if (AuthorizationExecuteWithPrivileges(authorization, executablePath, options, (char* const*)arguments, NULL) == errAuthorizationSuccess)
+#pragma clang diagnostic pop
 	{
 		int status = 0;
 		pid_t pid = wait(&status);

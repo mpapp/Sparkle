@@ -46,7 +46,6 @@ This method has been tested and successfully deployed on Mac OS X 10.4 - 10.8.
 #ifndef SUGUIDEDPACKAGEINSTALLER_H
 #define SUGUIDEDPACKAGEINSTALLER_H
 
-#import "Sparkle.h"
 #import "SUInstaller.h"
 
 extern NSString* SUInstallerGuidedInstallerFilename; // default filename for guided installer property list
