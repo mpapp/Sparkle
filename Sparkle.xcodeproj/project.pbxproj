@@ -1862,6 +1862,7 @@
 			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1870,6 +1871,7 @@
 			baseConfigurationReference = FA1941D50D94A70100DD942E /* ConfigFrameworkRelease.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
