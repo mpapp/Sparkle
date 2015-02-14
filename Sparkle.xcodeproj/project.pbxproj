@@ -260,6 +260,13 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = Sparkle;
 		};
+		5FBB980F1A8F66650014D433 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B74D85719217A74006F9DCA;
+			remoteInfo = SandboxService;
+		};
 		61B5F91B09C4CF7200B25A18 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -1234,6 +1241,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5FBB98101A8F66650014D433 /* PBXTargetDependency */,
 				55C14F97136F044100649790 /* PBXTargetDependency */,
 			);
 			name = Sparkle;
@@ -1633,6 +1641,11 @@
 			target = 8DC2EF4F0486A6940098B216 /* Sparkle */;
 			targetProxy = 5D06E8D50FD68C86005AE3F6 /* PBXContainerItemProxy */;
 		};
+		5FBB98101A8F66650014D433 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B74D85719217A74006F9DCA /* SandboxService */;
+			targetProxy = 5FBB980F1A8F66650014D433 /* PBXContainerItemProxy */;
+		};
 		61B5F91C09C4CF7200B25A18 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* Sparkle */;
@@ -1848,6 +1861,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 			};
 			name = Debug;
 		};
@@ -1855,6 +1869,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D50D94A70100DD942E /* ConfigFrameworkRelease.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 			};
 			name = Release;
 		};
@@ -1876,6 +1891,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 			};
 			name = Debug;
 		};
@@ -1883,6 +1899,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D40D94A70100DD942E /* ConfigRelaunchRelease.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 			};
 			name = Release;
 		};
