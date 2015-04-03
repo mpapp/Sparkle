@@ -1448,6 +1448,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				OTHER_CFLAGS = "-DDEBUG";
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = x86_64;
@@ -1494,6 +1495,7 @@
 				INFOPLIST_FILE = "finish_installation-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_CFLAGS = "-DDEBUG";
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
