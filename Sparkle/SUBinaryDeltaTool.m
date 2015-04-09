@@ -159,7 +159,7 @@ int main(int __unused argc, char __unused *argv[])
             return 1;
         }
 
-        fprintf(stderr, "Processing %s...", [oldPath UTF8String]);
+        fprintf(stdout, "Processing %s...", [oldPath UTF8String]);
         FTSENT *ent = 0;
         while ((ent = fts_read(fts))) {
             if (ent->fts_info != FTS_F && ent->fts_info != FTS_SL && ent->fts_info != FTS_D) {
@@ -184,7 +184,7 @@ int main(int __unused argc, char __unused *argv[])
             newTreeState[key] = [NSNull null];
         }
 
-        fprintf(stderr, "\nProcessing %s...  ", [newPath UTF8String]);
+        fprintf(stdout, "\nProcessing %s...  ", [newPath UTF8String]);
         sourcePaths[0] = [newPath fileSystemRepresentation];
         fts = fts_open((char* const*)sourcePaths, FTS_PHYSICAL | FTS_NOCHDIR, compareFiles);
         if (!fts) {
@@ -206,16 +206,29 @@ int main(int __unused argc, char __unused *argv[])
             NSDictionary *info = infoForFile(ent);
             NSDictionary *oldInfo = originalTreeState[key];
 
-            if ([info isEqual:oldInfo])
+            if ([info isEqual:oldInfo]) {
                 [newTreeState removeObjectForKey:key];
-            else
+            } else {
                 newTreeState[key] = info;
+                
+                if (oldInfo && [oldInfo[@"type"] unsignedShortValue] == FTS_D && [info[@"type"] unsignedShortValue] != FTS_D) {
+                    NSArray *parentPathComponents = key.pathComponents;
+
+                    for (NSString *childPath in originalTreeState) {
+                        NSArray *childPathComponents = childPath.pathComponents;
+                        if (childPathComponents.count > parentPathComponents.count &&
+                            [parentPathComponents isEqualToArray:[childPathComponents subarrayWithRange:NSMakeRange(0, parentPathComponents.count)]]) {
+                            [newTreeState removeObjectForKey:childPath];
+                        }
+                    }
+                }
+            }
         }
         fts_close(fts);
 
         NSString *afterHash = hashOfTree(newPath);
 
-        fprintf(stderr, "\nGenerating delta...  ");
+        fprintf(stdout, "\nGenerating delta...  ");
 
         NSString *temporaryFile = temporaryPatchFile(patchFile);
         xar_t x = xar_open([temporaryFile fileSystemRepresentation], WRITE);
@@ -227,7 +240,16 @@ int main(int __unused argc, char __unused *argv[])
         NSOperationQueue *deltaQueue = [[NSOperationQueue alloc] init];
         NSMutableArray *deltaOperations = [NSMutableArray array];
 
-        NSArray *keys = [[newTreeState allKeys] sortedArrayUsingSelector:@selector(compare:)];
+        // Sort the keys by preferring the ones from the original tree to appear first
+        // We want to enforce deleting before extracting in the case paths differ only by case
+        NSArray *keys = [[newTreeState allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *key1, NSString *key2) {
+            NSComparisonResult insensitiveCompareResult = [key1 caseInsensitiveCompare:key2];
+            if (insensitiveCompareResult != NSOrderedSame) {
+                return insensitiveCompareResult;
+            }
+
+            return originalTreeState[key1] ? NSOrderedAscending : NSOrderedDescending;
+        }];
         for (NSString* key in keys) {
             id value = [newTreeState valueForKey:key];
 
@@ -269,7 +291,7 @@ int main(int __unused argc, char __unused *argv[])
         unlink([patchFile fileSystemRepresentation]);
         link([temporaryFile fileSystemRepresentation], [patchFile fileSystemRepresentation]);
         unlink([temporaryFile fileSystemRepresentation]);
-        fprintf(stderr, "Done!\n");
+        fprintf(stdout, "Done!\n");
 
         return 0;
     }
