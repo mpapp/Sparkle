@@ -1258,7 +1258,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SU;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Sparkle Project";
 				TargetAttributes = {
 					377E56481A8BB5E9003F5516 = {
