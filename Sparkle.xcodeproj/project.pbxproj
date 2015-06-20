@@ -1896,6 +1896,7 @@
 			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
 			};
 			name = Debug;
 		};
@@ -1927,6 +1928,7 @@
 			baseConfigurationReference = 377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
 			};
 			name = Debug;
 		};
@@ -1943,6 +1945,7 @@
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
 			};
 			name = Debug;
 		};
