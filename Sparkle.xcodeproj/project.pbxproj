@@ -1971,6 +1971,80 @@
 			};
 			name = Release;
 		};
+		5FEA53ED1B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CF0D94A70100DD942E /* ConfigCommonDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53EE1B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				OTHER_CODE_SIGN_FLAGS = "";
+			};
+			name = Testing;
+		};
+		5FEA53EF1B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CB0D94A70100DD942E /* ConfigTestAppDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53F01B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA3AAF3A1050B273004B3130 /* ConfigUnitTestDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53F11B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D06E8F20FD68D21005AE3F6 /* ConfigBinaryDeltaDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53F21B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				OTHER_CODE_SIGN_FLAGS = "";
+			};
+			name = Testing;
+		};
+		5FEA53F31B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				OTHER_CODE_SIGN_FLAGS = "";
+			};
+			name = Testing;
+		};
+		5FEA53F41B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53F51B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Testing;
+		};
+		5FEA53F61B363ACF004FE854 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Testing;
+		};
 		612279DB0DB5470300AB99EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA3AAF3A1050B273004B3130 /* ConfigUnitTestDebug.xcconfig */;
@@ -2006,6 +2080,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1420DF4B1962329200203BB0 /* Debug */,
+				5FEA53F51B363ACF004FE854 /* Testing */,
 				1420DF4C1962329200203BB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2015,6 +2090,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14732BC71960F69300593899 /* Debug */,
+				5FEA53F41B363ACF004FE854 /* Testing */,
 				14732BC81960F69300593899 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2024,6 +2100,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14950061195FB89500BC5B5B /* Debug */,
+				5FEA53F61B363ACF004FE854 /* Testing */,
 				14950062195FB89500BC5B5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2033,6 +2110,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91AE08733DA50010E9CD /* Debug */,
+				5FEA53EE1B363ACF004FE854 /* Testing */,
 				1DEB91AF08733DA50010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2042,6 +2120,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
+				5FEA53ED1B363ACF004FE854 /* Testing */,
 				1DEB91B308733DA50010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2051,6 +2130,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				377E56541A8BB5E9003F5516 /* Debug */,
+				5FEA53F31B363ACF004FE854 /* Testing */,
 				377E56551A8BB5E9003F5516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2060,6 +2140,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55C14BBB136EEF1500649790 /* Debug */,
+				5FEA53F21B363ACF004FE854 /* Testing */,
 				55C14BBC136EEF1500649790 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2069,6 +2150,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D06E8D20FD68C7D005AE3F6 /* Debug */,
+				5FEA53F11B363ACF004FE854 /* Testing */,
 				5D06E8D30FD68C7D005AE3F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2078,6 +2160,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				612279DB0DB5470300AB99EA /* Debug */,
+				5FEA53F01B363ACF004FE854 /* Testing */,
 				612279DC0DB5470300AB99EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2087,6 +2170,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61B5F90609C4CEE300B25A18 /* Debug */,
+				5FEA53EF1B363ACF004FE854 /* Testing */,
 				61B5F90709C4CEE300B25A18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
