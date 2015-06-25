@@ -95,7 +95,7 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
     FSVolumeRefNum vSrcRefNum = kFSInvalidVolumeRefNum;
     FSCatalogInfo catInfo;
     memset(&catInfo, 0, sizeof(catInfo));
-    OSStatus err = FSPathMakeRef((UInt8 *)[path fileSystemRepresentation], &pathRef, NULL);
+    OSStatus err = FSPathMakeRef((const UInt8 *)[path fileSystemRepresentation], &pathRef, NULL);
 	if( err == noErr )
 	{
         err = FSGetCatalogInfo(&pathRef, kFSCatInfoVolume, &catInfo, NULL, NULL, NULL);
@@ -439,7 +439,7 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
     NSString *tmpPath = [self _temporaryCopyNameForPath:dst didFindTrash:&didFindTrash];
 
     // Make FSRef for destination:
-    err = FSPathMakeRefWithOptions((UInt8 *)[dst fileSystemRepresentation], kFSPathMakeRefDoNotFollowLeafSymlink, &dstRef, NULL);
+    err = FSPathMakeRefWithOptions((const UInt8 *)[dst fileSystemRepresentation], kFSPathMakeRefDoNotFollowLeafSymlink, &dstRef, NULL);
     hadFileAtDest = (err == noErr); // There is a file at the destination, move it aside. If we normalized the name, we might not get here, so don't error.
 	if( hadFileAtDest )
 	{
@@ -459,12 +459,12 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
 
 	if( hadFileAtDest )
 	{
-        err = FSPathMakeRef((UInt8 *)[[tmpPath stringByDeletingLastPathComponent] fileSystemRepresentation], &tmpDirRef, NULL);
+        err = FSPathMakeRef((const UInt8 *)[[tmpPath stringByDeletingLastPathComponent] fileSystemRepresentation], &tmpDirRef, NULL);
         if (err != noErr)
-            FSPathMakeRef((UInt8 *)[[dst stringByDeletingLastPathComponent] fileSystemRepresentation], &tmpDirRef, NULL);
+            FSPathMakeRef((const UInt8 *)[[dst stringByDeletingLastPathComponent] fileSystemRepresentation], &tmpDirRef, NULL);
     }
 
-    err = FSPathMakeRef((UInt8 *)[[dst stringByDeletingLastPathComponent] fileSystemRepresentation], &dstDirRef, NULL);
+    err = FSPathMakeRef((const UInt8 *)[[dst stringByDeletingLastPathComponent] fileSystemRepresentation], &dstDirRef, NULL);
 
 	if (err == noErr && hadFileAtDest)
 	{
@@ -478,7 +478,7 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
         }
     }
 
-    err = FSPathMakeRef((UInt8 *)[src fileSystemRepresentation], &srcRef, NULL);
+    err = FSPathMakeRef((const UInt8 *)[src fileSystemRepresentation], &srcRef, NULL);
 	if (err == noErr)
 	{
         NSFileManager *manager = [[NSFileManager alloc] init];
@@ -550,7 +550,7 @@ static BOOL AuthorizationExecuteWithPrivilegesAndWait(AuthorizationRef authoriza
     NSFileManager *manager = [NSFileManager defaultManager];
 #if __MAC_OS_X_VERSION_MIN_REQUIRED < 101000
     if (!&NSURLQuarantinePropertiesKey) {
-        NSString *const quarantineAttribute = (NSString*)kLSItemQuarantineProperties;
+        NSString *const quarantineAttribute = (__bridge NSString *)kLSItemQuarantineProperties;
         const int removeXAttrOptions = XATTR_NOFOLLOW;
 
         [self removeXAttr:quarantineAttribute
