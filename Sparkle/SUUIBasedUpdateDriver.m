@@ -52,18 +52,38 @@
 
     // Only show the update alert if the app is active; otherwise, we'll wait until it is.
     if ([NSApp isActive]) {
-        [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window
-                                                 completionHandler:^(NSModalResponse returnCode) {
-                                                     
-                                                 }];
-        
-        //[[self.updateAlert window] makeKeyAndOrderFront:self];
+        NSWindow *mainWindow = [[NSApplication sharedApplication] mainWindow];
+        if ([self allowsUpdateAlertPresentationAsSheet] && mainWindow) {
+            
+            static const CGFloat mainWindowInsetFraction = 0.15;
+            NSRect frame = NSInsetRect(mainWindow.frame,
+                                       mainWindow.frame.size.width * mainWindowInsetFraction,
+                                       mainWindow.frame.size.height * mainWindowInsetFraction);
+            NSSize size = frame.size;
+            [self.updateAlert.window setMaxSize:size];
+            [self.updateAlert.window setFrame:frame display:NO];
+            
+            [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window
+                                                     completionHandler:nil];
+        }
+        else {
+            [[self.updateAlert window] makeKeyAndOrderFront:self];
+        }
     }
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidBecomeActive:)
                                                      name:NSApplicationDidBecomeActiveNotification object:NSApp];
     }
+}
+
+- (BOOL)allowsUpdateAlertPresentationAsSheet
+{
+    BOOL allowSheetPresentation = YES; // Defaults to YES.
+    if ([self.host objectForInfoDictionaryKey:SUEnableUpdateAlertSheetPresentation])
+        allowSheetPresentation = [self.host boolForInfoDictionaryKey:SUEnableUpdateAlertSheetPresentation];
+    
+    return allowSheetPresentation;
 }
 
 - (void)didNotFindUpdate
@@ -83,11 +103,12 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)__unused aNotification
 {
-    [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window
-                                             completionHandler:^(NSModalResponse returnCode) {
-                                                 
-                                             }];
-    //[[self.updateAlert window] makeKeyAndOrderFront:self];
+    if ([self allowsUpdateAlertPresentationAsSheet] && [[NSApplication sharedApplication] mainWindow]) {
+        [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window completionHandler:nil];
+    }
+    else {
+        [[self.updateAlert window] makeKeyAndOrderFront:self];
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
 }
 

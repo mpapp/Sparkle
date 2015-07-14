@@ -73,13 +73,16 @@
 
 - (NSString *)description { return [NSString stringWithFormat:@"%@ <%@>", [self class], [self.host bundlePath]]; }
 
-
 - (void)endWithSelection:(SUUpdateAlertChoice)choice
 {
     [self.releaseNotesView stopLoading:self];
     [self.releaseNotesView setFrameLoadDelegate:nil];
     [self.releaseNotesView setPolicyDelegate:nil];
     [self.releaseNotesView removeFromSuperview]; // Otherwise it gets sent Esc presses (why?!) and gets very confused.
+    
+    if (self.window.sheetParent) {
+        [self.window.sheetParent endSheet:self.window];
+    }
     [self close];
     self.completionBlock(choice);
     self.completionBlock = nil;
