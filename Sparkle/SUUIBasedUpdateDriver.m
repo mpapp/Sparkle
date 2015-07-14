@@ -51,10 +51,19 @@
     }
 
     // Only show the update alert if the app is active; otherwise, we'll wait until it is.
-    if ([NSApp isActive])
-        [[self.updateAlert window] makeKeyAndOrderFront:self];
-    else
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    if ([NSApp isActive]) {
+        [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window
+                                                 completionHandler:^(NSModalResponse returnCode) {
+                                                     
+                                                 }];
+        
+        //[[self.updateAlert window] makeKeyAndOrderFront:self];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidBecomeActive:)
+                                                     name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    }
 }
 
 - (void)didNotFindUpdate
@@ -74,7 +83,11 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)__unused aNotification
 {
-    [[self.updateAlert window] makeKeyAndOrderFront:self];
+    [[[NSApplication sharedApplication] mainWindow] beginSheet:self.updateAlert.window
+                                             completionHandler:^(NSModalResponse returnCode) {
+                                                 
+                                             }];
+    //[[self.updateAlert window] makeKeyAndOrderFront:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
 }
 
