@@ -22,7 +22,7 @@
         
 		xpc_dictionary_apply(event, ^bool(const char *key, xpc_object_t value) {
             
-			NSLog(@"XPC %s: %s", key, xpc_string_get_string_ptr(value));
+			NSLog(@"XPC %@: %@", [NSString stringWithUTF8String:key], [NSString stringWithUTF8String:xpc_string_get_string_ptr(value)]);
 			return true;
 		});
 	});
@@ -47,7 +47,7 @@
 	xpc_connection_t connection = xpc_connection_create(SPARKLE_SANDBOX_SERVICE_NAME, NULL);
 	xpc_connection_set_event_handler(connection, ^(xpc_object_t event) {
 		xpc_dictionary_apply(event, ^bool(const char *key, xpc_object_t value) {
-			NSLog(@"XPC %s: %s", key, xpc_string_get_string_ptr(value));
+			NSLog(@"XPC %@: %@", [NSString stringWithUTF8String:key], [NSString stringWithUTF8String:xpc_string_get_string_ptr(value)]);
 			return true;
 		});
 	});
