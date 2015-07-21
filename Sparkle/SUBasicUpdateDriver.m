@@ -192,6 +192,11 @@
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self.updateItem fileURL]];
     [request setValue:[self.updater userAgentString] forHTTPHeaderField:@"User-Agent"];
+    if ([[self.updater delegate] respondsToSelector:@selector(updater:willDownloadUpdate:withRequest:)]) {
+        [[self.updater delegate] updater:self.updater
+                      willDownloadUpdate:self.updateItem
+                             withRequest:request];
+    }
     self.download = [[NSURLDownload alloc] initWithRequest:request delegate:self];
 }
 
@@ -220,6 +225,16 @@
     [self.download setDestination:self.downloadPath allowOverwrite:YES];
 }
 
+/**
+ * If the update is a package, then it must be signed using DSA. No other verification is done.
+ *
+ * If the update is a bundle, then it must meet any one of:
+ *
+ *  * old and new DSA public keys are the same and valid (it allows change of Code Signing identity), or
+ *
+ *  * old and new Code Signing identity are the same and valid
+ *
+ */
 - (BOOL)validateUpdateDownloadedToPath:(NSString *)downloadedPath extractedToPath:(NSString *)extractedPath DSASignature:(NSString *)DSASignature publicDSAKey:(NSString *)publicDSAKey
 {
     BOOL isPackage = NO;
@@ -234,7 +249,7 @@
         BOOL packageValidated = [SUDSAVerifier validatePath:downloadedPath withEncodedDSASignature:DSASignature withPublicDSAKey:publicDSAKey];
 
         if (!packageValidated) {
-            SULog(@"DSA signature validation failed. The update will be rejected.");
+            SULog(@"DSA signature validation of the package failed. The update will be rejected.");
         }
         
         return packageValidated;
@@ -249,33 +264,41 @@
     SUHost *newHost = [[SUHost alloc] initWithBundle:newBundle];
     NSString *newPublicDSAKey = newHost.publicDSAKey;
     
+    BOOL dsaKeysMatch = (publicDSAKey == nil || newPublicDSAKey == nil) ? NO : [publicDSAKey isEqualToString:newPublicDSAKey];
+    
     if (newPublicDSAKey != nil) {
         if (![SUDSAVerifier validatePath:downloadedPath withEncodedDSASignature:DSASignature withPublicDSAKey:newPublicDSAKey]) {
-            SULog(@"DSA signature validation failed. The update will be rejected.");
+            SULog(@"DSA signature validation failed. The update has a public DSA key and is signed with a DSA key, but the %@ doesn't match the signature. The update will be rejected.",
+                  dsaKeysMatch ? @"public key" : @"new public key shipped with the update");
             return NO;
         }
     }
     
-    BOOL dsaKeysMatch = (publicDSAKey == nil || newPublicDSAKey == nil) ? NO : [publicDSAKey isEqualToString:newPublicDSAKey];
+    BOOL updateIsCodeSigned = [SUCodeSigningVerifier applicationAtPathIsCodeSigned:installSourcePath];
+
     if (dsaKeysMatch) {
         NSError *error = nil;
-        if ([SUCodeSigningVerifier applicationAtPathIsCodeSigned:installSourcePath] && ![SUCodeSigningVerifier codeSignatureIsValidAtPath:installSourcePath error:&error]) {
-            SULog(@"The application to update has an invalid code signature: %@. The update will be rejected.", error);
+        if (updateIsCodeSigned && ![SUCodeSigningVerifier codeSignatureIsValidAtPath:installSourcePath error:&error]) {
+            SULog(@"The update archive has a valid DSA signature, but the app is also signed with Code Signing, which is corrupted: %@. The update will be rejected.", error);
             return NO;
         }
     } else {
-        if (![SUCodeSigningVerifier hostApplicationIsCodeSigned] || ![SUCodeSigningVerifier applicationAtPathIsCodeSigned:installSourcePath]) {
-            SULog(@"Public DSA keys differ or are absent, and both apps are not code signed. The update will be rejected.");
+        BOOL hostIsCodeSigned = [SUCodeSigningVerifier hostApplicationIsCodeSigned];
+
+        NSString *dsaStatus = newPublicDSAKey ? @"has a new DSA key that doesn't match the previous one" : (publicDSAKey ? @"removes the DSA key" : @"isn't signed with a DSA key");
+        if (!hostIsCodeSigned || !updateIsCodeSigned) {
+            NSString *acsStatus = !hostIsCodeSigned ? @"old app hasn't been signed with app Code Signing" : @"new app isn't signed with app Code Signing";
+            SULog(@"The update archive %@, and the %@. At least one method of signature verification must be valid. The update will be rejected.", dsaStatus, acsStatus);
             return NO;
         }
-        
+
         NSError *error = nil;
         if (![SUCodeSigningVerifier codeSignatureMatchesHostAndIsValidAtPath:installSourcePath error:&error]) {
-            SULog(@"The update will be rejected because the code signature from the original and updated application failed to match: %@", error);
+            SULog(@"The update archive %@, and the app is signed with a new Code Signing identity that doesn't match code signing of the original app: %@. At least one method of signature verification must be valid. The update will be rejected.", dsaStatus, error);
             return NO;
         }
     }
-    
+
     return YES;
 }
 
@@ -291,6 +314,12 @@
     NSURL *failingUrl = error.userInfo[NSURLErrorFailingURLErrorKey];
     if (!failingUrl) {
         failingUrl = [self.updateItem fileURL];
+    }
+    
+    if ([[self.updater delegate] respondsToSelector:@selector(updater:failedToDownloadUpdate:error:)]) {
+        [[self.updater delegate] updater:self.updater
+                  failedToDownloadUpdate:self.updateItem
+                                   error:error];
     }
 
     [self abortUpdateWithError:[NSError errorWithDomain:SUSparkleErrorDomain code:SURelaunchError userInfo:@{
@@ -416,7 +445,8 @@
     if ([updaterDelegate respondsToSelector:@selector(updaterWillRelaunchApplication:)])
         [updaterDelegate updaterWillRelaunchApplication:self.updater];
 
-    if (!self.relaunchPath || ![[NSFileManager defaultManager] fileExistsAtPath:self.relaunchPath]) {
+    NSString *relaunchToolPath = [[NSBundle bundleWithPath:self.relaunchPath] executablePath];
+    if (!relaunchToolPath || ![[NSFileManager defaultManager] fileExistsAtPath:self.relaunchPath]) {
         // Note that we explicitly use the host app's name here, since updating plugin for Mail relaunches Mail, not just the plugin.
         [self abortUpdateWithError:[NSError errorWithDomain:SUSparkleErrorDomain code:SURelaunchError userInfo:@{
             NSLocalizedDescriptionKey: [NSString stringWithFormat:SULocalizedString(@"An error occurred while relaunching %1$@, but the new version will be available next time you run %1$@.", nil), [self.host name]],
@@ -430,7 +460,6 @@
     if ([updaterDelegate respondsToSelector:@selector(pathToRelaunchForUpdater:)]) {
         pathToRelaunch = [updaterDelegate pathToRelaunchForUpdater:self.updater];
     }
-    NSString *relaunchToolPath = [[NSBundle bundleWithPath:self.relaunchPath] executablePath];
     NSArray *relaunchToolArguments = @[[self.host bundlePath],
                                        pathToRelaunch,
                                        [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]],

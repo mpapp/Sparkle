@@ -16,7 +16,7 @@
 
 + (void)performInstallationToPath:(NSString *)installationPath fromPath:(NSString *)path host:(SUHost *)host versionComparator:(id<SUVersionComparison>)comparator completionHandler:(void (^)(NSError *))completionHandler
 {
-    NSParameterAssert(host);
+    SUParameterAssert(host);
 
     // Prevent malicious downgrades
     if (![[[NSBundle bundleWithIdentifier:SUBundleIdentifier] infoDictionary][SUEnableAutomatedDowngradesKey] boolValue]) {
@@ -32,14 +32,11 @@
         NSError *error = nil;
         NSString *oldPath = [host bundlePath];
         NSString *tempName = [self temporaryNameForPath:[host installationPath]];
-        BOOL hostIsCodeSigned = [SUCodeSigningVerifier applicationAtPathIsCodeSigned:oldPath];
 
         BOOL result = [self copyPathWithAuthentication:path overPath:installationPath temporaryName:tempName error:&error];
         
         if (result) {
-            // If the host is code signed, then the replacement should be be too (and the signature should be valid).
-            BOOL needToCheckCodeSignature = (hostIsCodeSigned || [SUCodeSigningVerifier applicationAtPathIsCodeSigned:installationPath]);
-            if (needToCheckCodeSignature) {
+            if ([SUCodeSigningVerifier applicationAtPathIsCodeSigned:installationPath]) {
                 result = [SUCodeSigningVerifier codeSignatureIsValidAtPath:installationPath error:&error];
             }
         }
