@@ -56,7 +56,7 @@ static void peer_event_handler(xpc_connection_t peer, xpc_object_t event)
             if ( [SUCodeSigningVerifier codeSignatureIsValidAtPath:temporaryName error:&error] )
             {
                 // Installation
-                [SUPlainInstaller copyPathWithAuthentication: relaunchPathToCopy overPath: targetPath temporaryName: temporaryName error: &error];
+                [SUPlainInstaller copyPathWithAuthentication:relaunchPathToCopy overPath:targetPath appendVersion:SPARKLE_APPEND_VERSION_NUMBER error:&error];
             }
             else
             {
