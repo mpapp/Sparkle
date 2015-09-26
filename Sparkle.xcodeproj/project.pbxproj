@@ -1201,7 +1201,6 @@
 			buildPhases = (
 				377E56451A8BB5E9003F5516 /* Sources */,
 				377E56461A8BB5E9003F5516 /* Frameworks */,
-				377E56561A8BB693003F5516 /* Set Git Version Info */,
 			);
 			buildRules = (
 			);
@@ -2047,6 +2046,168 @@
 			};
 			name = Release;
 		};
+		5F511AA41BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CF0D94A70100DD942E /* ConfigCommonDebug.xcconfig */;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = AppStoreDebug;
+		};
+		5F511AA51BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
+			};
+			name = AppStoreDebug;
+		};
+		5F511AA61BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CB0D94A70100DD942E /* ConfigTestAppDebug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreDebug;
+		};
+		5F511AA71BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA3AAF3A1050B273004B3130 /* ConfigUnitTestDebug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreDebug;
+		};
+		5F511AA81BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D06E8F20FD68D21005AE3F6 /* ConfigBinaryDeltaDebug.xcconfig */;
+			buildSettings = {
+			};
+			name = AppStoreDebug;
+		};
+		5F511AA91BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
+			};
+			name = AppStoreDebug;
+		};
+		5F511AAA1BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 377E56431A8BB595003F5516 /* ConfigSandboxServiceDebug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp=none";
+			};
+			name = AppStoreDebug;
+		};
+		5F511AAB1BB75902005E4A2E /* Coverage */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = SandboxService;
+			};
+			name = Coverage;
+		};
+		5F511AAC1BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreDebug;
+		};
+		5F511AAD1BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreDebug;
+		};
+		5F511AAE1BB75902005E4A2E /* AppStoreDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreDebug;
+		};
+		5F511AAF1BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941CC0D94A70100DD942E /* ConfigCommonRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB01BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941D50D94A70100DD942E /* ConfigFrameworkRelease.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB11BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941D20D94A70100DD942E /* ConfigTestAppRelease.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB21BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA3AAF391050B273004B3130 /* ConfigUnitTestRelease.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB31BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D06E8F30FD68D21005AE3F6 /* ConfigBinaryDeltaRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB41BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1941D40D94A70100DD942E /* ConfigRelaunchRelease.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB51BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 377E56441A8BB595003F5516 /* ConfigSandboxServiceRelease.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB61BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB71BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreRelease;
+		};
+		5F511AB81BB7590C005E4A2E /* AppStoreRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = AppStoreRelease;
+		};
 		5FEA53ED1B363ACF004FE854 /* Testing */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941CF0D94A70100DD942E /* ConfigCommonDebug.xcconfig */;
@@ -2165,9 +2326,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1420DF4B1962329200203BB0 /* Debug */,
+				5F511AAD1BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F51B363ACF004FE854 /* Testing */,
 				149B78611B7D398100D7D62C /* Coverage */,
 				1420DF4C1962329200203BB0 /* Release */,
+				5F511AB71BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2176,9 +2339,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14732BC71960F69300593899 /* Debug */,
+				5F511AAC1BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F41B363ACF004FE854 /* Testing */,
 				149B78601B7D398100D7D62C /* Coverage */,
 				14732BC81960F69300593899 /* Release */,
+				5F511AB61BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2187,9 +2352,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14950061195FB89500BC5B5B /* Debug */,
+				5F511AAE1BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F61B363ACF004FE854 /* Testing */,
 				149B78621B7D398100D7D62C /* Coverage */,
 				14950062195FB89500BC5B5B /* Release */,
+				5F511AB81BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2198,9 +2365,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91AE08733DA50010E9CD /* Debug */,
+				5F511AA51BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53EE1B363ACF004FE854 /* Testing */,
 				149B785B1B7D398100D7D62C /* Coverage */,
 				1DEB91AF08733DA50010E9CD /* Release */,
+				5F511AB01BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2209,9 +2378,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
+				5F511AA41BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53ED1B363ACF004FE854 /* Testing */,
 				149B785A1B7D398100D7D62C /* Coverage */,
 				1DEB91B308733DA50010E9CD /* Release */,
+				5F511AAF1BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2220,8 +2391,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				377E56541A8BB5E9003F5516 /* Debug */,
+				5F511AAA1BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F31B363ACF004FE854 /* Testing */,
 				377E56551A8BB5E9003F5516 /* Release */,
+				5F511AB51BB7590C005E4A2E /* AppStoreRelease */,
+				5F511AAB1BB75902005E4A2E /* Coverage */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2230,9 +2404,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55C14BBB136EEF1500649790 /* Debug */,
+				5F511AA91BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F21B363ACF004FE854 /* Testing */,
 				149B785F1B7D398100D7D62C /* Coverage */,
 				55C14BBC136EEF1500649790 /* Release */,
+				5F511AB41BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2241,9 +2417,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5D06E8D20FD68C7D005AE3F6 /* Debug */,
+				5F511AA81BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F11B363ACF004FE854 /* Testing */,
 				149B785E1B7D398100D7D62C /* Coverage */,
 				5D06E8D30FD68C7D005AE3F6 /* Release */,
+				5F511AB31BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2252,9 +2430,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				612279DB0DB5470300AB99EA /* Debug */,
+				5F511AA71BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53F01B363ACF004FE854 /* Testing */,
 				149B785D1B7D398100D7D62C /* Coverage */,
 				612279DC0DB5470300AB99EA /* Release */,
+				5F511AB21BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2263,9 +2443,11 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61B5F90609C4CEE300B25A18 /* Debug */,
+				5F511AA61BB75902005E4A2E /* AppStoreDebug */,
 				5FEA53EF1B363ACF004FE854 /* Testing */,
 				149B785C1B7D398100D7D62C /* Coverage */,
 				61B5F90709C4CEE300B25A18 /* Release */,
+				5F511AB11BB7590C005E4A2E /* AppStoreRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
