@@ -18,7 +18,7 @@
 #endif
 
 // Define some minimum intervals to avoid DoS-like checking attacks
-const NSTimeInterval SUMinimumUpdateCheckInterval = DEBUG ? 60 : (60 * 60);
+const NSTimeInterval SUMinimumUpdateCheckInterval = DEBUG ? 60 : (60 * 15);
 const NSTimeInterval SUDefaultUpdateCheckInterval = DEBUG ? 60 : (60 * 60 * 24);
 
 NSString *const SUBundleIdentifier = @SPARKLE_BUNDLE_IDENTIFIER;
