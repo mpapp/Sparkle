@@ -29,7 +29,7 @@
 @end
 #endif
 
-@interface SUUIBasedUpdateDriver ()
+@interface SUUIBasedUpdateDriver () <NSAlertDelegate>
 
 @property (strong) SUStatusController *statusController;
 @property (strong) SUUpdateAlert *updateAlert;
@@ -259,10 +259,23 @@
 - (void)abortUpdateWithError:(NSError *)error
 {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = SULocalizedString(@"Update Error!", nil);
-    alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
-    [alert addButtonWithTitle:SULocalizedString(@"Cancel Update", nil)];
-    [self showModalAlert:alert];
+    alert.messageText = SULocalizedString(@"Update Error", nil);
+    
+    NSString *directDownloadURL = NSBundle.mainBundle.infoDictionary[@"SUDirectDownloadURL"];
+    if (directDownloadURL) {
+        alert.informativeText = [NSString stringWithFormat:@"%@", [[error localizedDescription] stringByAppendingString:@"\nThe update issue is often resolvable by downloading the newest version of the app manually and replacing the version you are running and trying to update from to it. Would you like to try that?"]];
+        [alert addButtonWithTitle:SULocalizedString(@"Download Manually", nil)];
+        [alert addButtonWithTitle:SULocalizedString(@"Cancel Update", nil)];
+    }
+    else {
+        alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+        [alert addButtonWithTitle:SULocalizedString(@"Cancel Update", nil)];
+    }
+    
+    if (directDownloadURL && [self showModalAlert:alert] == NSModalResponseOK) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:directDownloadURL]];
+    }
+    
     [super abortUpdateWithError:error];
 }
 
@@ -276,7 +289,7 @@
     [super abortUpdate];
 }
 
-- (void)showModalAlert:(NSAlert *)alert
+- (NSModalResponse)showModalAlert:(NSAlert *)alert
 {
     if ([[self.updater delegate] respondsToSelector:@selector(updaterWillShowModalAlert:)]) {
         [[self.updater delegate] updaterWillShowModalAlert:self.updater];
@@ -287,10 +300,12 @@
     if ([self.host isBackgroundApplication]) { [NSApp activateIgnoringOtherApps:YES]; }
 
     [alert setIcon:[self.host icon]];
-    [alert runModal];
+    NSModalResponse modalResponse = [alert runModal];
 
     if ([[self.updater delegate] respondsToSelector:@selector(updaterDidShowModalAlert:)])
         [[self.updater delegate] updaterDidShowModalAlert:self.updater];
+    
+    return modalResponse;
 }
 
 @end
