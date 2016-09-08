@@ -272,7 +272,7 @@
         [alert addButtonWithTitle:SULocalizedString(@"Cancel Update", nil)];
     }
     
-    if (directDownloadURL && [self showModalAlert:alert] == NSModalResponseOK) {
+    if (directDownloadURL && [self showModalAlert:alert] == NSAlertFirstButtonReturn) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:directDownloadURL]];
     }
     
